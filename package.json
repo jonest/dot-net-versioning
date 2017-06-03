@@ -1,0 +1,26 @@
+{
+  "name": "dot-net-versioning",
+  "version": "0.0.1",
+  "description": "Version .NET solutions",
+  "scripts": {
+    "install-libs": "npm install && cd Tasks/VersionAssemblies && npm install",
+    "build": "tsc -p .",
+    "postbuild": "npm run package",
+    "package": "tfx extension create",
+    "clean": "rimraf ./dist && rimraf ./*.vsix"
+  },
+  "keywords": [
+    "VSO",
+    "build",
+    "tasks"
+  ],
+  "author": "Ty Jones",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "7.0.27",
+    "@types/shelljs": "0.7.2",
+    "rimraf": "2.6.1",
+    "tfx-cli": "0.4.8",
+    "typescript": "2.3.4"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "id": "c3f8d3b3-f0e5-4b72-a0e2-9d0a014729cb",
+  "name": "dot-net-versioning",
+  "friendlyName": "Version .NET assemblies",
+  "description": "Versions SolutionInfo or AssemblyInfo in .NET solutions",
+  "author": "Ty Jones",
+  "category": "Utility",
+  "visibility": [
+    "Build"
+  ],
+  "version": {
+    "Major": 0,
+    "Minor": 1,
+    "Patch": 2
+  },
+  "instanceNameFormat": "Version Assemblies",
+  "groups": [
+    {
+      "name": "advanced",
+      "displayName": "Advanced",
+      "isExpanded": false
+    }
+  ],
+  "inputs": [
+    {
+      "name": "sourcePath",
+      "type": "filePath",
+      "label": "Source Path",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Location of files to version. Leave blank for root level." 
+    },
+    {
+      "name": "filePattern",
+      "type": "string",
+      "label": "File Pattern",
+      "defaultValue": "**\\SolutionInfo.*",
+      "required": true,
+      "helpMarkDown": "File pattern for versioning."
+    },
+    {
+      "name": "versionNumber",
+      "type": "string",
+      "label": "Version Number",
+      "defaultValue": "$(Build.BuildNumber)",
+      "required": true,
+      "helpMarkDown": "The version number to use for versioning."
+    },
+    {
+      "name": "versionPattern",
+      "type": "pickList",
+      "label": "Version Pattern",
+      "defaultValue": "major-minor-patch-build",
+      "options":{
+        "major-minor-patch-build": "1.x.x.x",
+        "major-minor-patch": "1.x.x",
+        "major-minor": "1.x"
+      },
+      "required": true,
+      "helpMarkDown": "Semantic versioning pattern used in files."
+    },
+    {
+      "name": "assemblyInfoSuffix",
+      "type": "string",
+      "label": "AssemblyInformationalVersion Suffix",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Applies suffix to AssemblyInformationalVersion (e.g. '-alpha', '-beta', '-dev')",
+      "groupName": "advanced"
+    },
+    {
+        "name": "failIfNoMatch",
+        "type": "boolean",
+        "label": "Fail If No Files or Version Found",
+        "defaultValue": "false",
+        "required": false,
+        "helpMarkDown": "Fail the build if no match is found for the files or version.",
+        "groupName": "advanced"
+    }
+  ],
+  "execution": {
+    "Node": {
+      "target": "versionAssemblies.js"
+    }
+  }
+}

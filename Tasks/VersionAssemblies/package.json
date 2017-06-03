@@ -1,0 +1,12 @@
+{
+  "name": "dot-net-versioning",
+  "version": "0.0.1",
+  "description": "Version .NET solutions",
+  "author": "Ty Jones",
+  "license": "MIT",
+  "dependencies": {
+    "process": "0.11.10",
+    "shelljs": "0.7.7",
+    "vsts-task-lib": "2.0.5"
+  }
+}

@@ -1,0 +1,45 @@
+{
+    "manifestVersion": 1,
+    "id": "dot-net-versioning",
+    "name": ".NET Versioning",
+    "version": "0.0.16",
+    "publisher": "whotyjones",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jonest/dot-net-versioning"
+    },
+    "description": "Versions assembly files .NET solutions",
+    "categories": [
+        "Build and release"
+    ],
+    "tags": [
+        "version",
+        "versioning",
+        "build"
+    ],
+    "files": [
+        {
+            "path": "Tasks"
+        }
+    ],
+    "contributions": [
+        {
+            "id":"dot-net-versioning-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "Tasks/VersionAssemblies"
+            }
+        }
+    ],
+    "icons": {
+        "default": "images/icon.png"
+    }
+}
