@@ -3,17 +3,21 @@
   "version": "0.0.1",
   "description": "Version .NET solutions",
   "scripts": {
-    "install-libs": "npm install && cd Tasks/VersionAssemblies && npm install",
+    "install-libs": "npm install && npm run install-task-libs && npm run install-test-libs",
+    "install-task-libs": "cd Tasks/VersionAssemblies && npm install",
+    "install-test-libs": "cd Tests && npm install && npm install -g typings && typings install",
     "build": "tsc -p .",
     "postbuild": "npm run package",
     "package": "tfx extension create",
-    "clean": "rimraf ./dist && rimraf ./*.vsix"
+    "clean": "npm run clean-tasks && npm run clean-tests && npm run clean-extensions",
+    "deep-clean": "npm run clean-tasks && npm run clean-tests && npm run clean-extensions && npm run clean-node-modules",
+    "clean-tasks": "find ./Tasks -maxdepth 2 -name '*.js' -type f | xargs rm -f && find ./Tasks -maxdepth 2 -name '*.js.map' -type f | xargs rm -f ",
+    "clean-tests": "find ./Tests -maxdepth 2 -name '*.js' -type f | xargs rm -f && find ./Tests -maxdepth 2 -name '*.js.map' -type f | xargs rm -f && rm -rf ./Tests/typings",
+    "clean-extensions": "find . -name '*.vsix' -type f | xargs rm -f",
+    "clean-node-modules": "rm -rf ./node_modules && rm -rf ./Tasks/VersionAssemblies/node_modules && rm -rf ./Tests/node_modules",
+    "test": "tsc -p . && cd Tests && npm test",
+    "full-run": "npm run install-libs && npm run build && npm test"
   },
-  "keywords": [
-    "VSO",
-    "build",
-    "tasks"
-  ],
   "author": "Ty Jones",
   "license": "MIT",
   "devDependencies": {
