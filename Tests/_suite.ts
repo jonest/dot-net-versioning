@@ -5,6 +5,23 @@ import * as FS from "fs";
 import * as Mocha from "mocha";
 
 describe("VersionAssemblies", function() {
+    after(() => {
+        let testFilesFolder = Path.join(__dirname, "VersionAssemblies", "testFiles");
+        if (FS.existsSync(testFilesFolder)) {
+            FS.rmdir(testFilesFolder);
+        }
+    });
+
+    afterEach(() => {
+        let testFilesFolder = Path.join(__dirname, "VersionAssemblies", "testFiles");
+        if (FS.existsSync(testFilesFolder)) {
+            let testFile = Path.join(testFilesFolder, "SolutionInfo.cs");
+            if (FS.existsSync(testFile)) {
+                FS.unlinkSync(testFile);
+            }
+        }
+    });
+
     describe("major-minor-patch-build", function() {
         it("should version correctly", (done: MochaDone) => {
             // Arrange
@@ -105,5 +122,39 @@ describe("VersionAssemblies", function() {
 
             done();
         });
+    });
+
+    describe("fail-if-no-match", function() {
+        it("should fail if no file match is found ", (done: MochaDone) => {
+            // Arrange
+            let testPath: string = Path.join(__dirname, "VersionAssemblies" ,"fail-if-no-file-match-found.test.js");
+            let testRunner: MockTest.MockTestRunner = new MockTest.MockTestRunner(testPath);
+
+            // Act
+            testRunner.run();
+
+            // Assert
+            Assert(testRunner.failed, "versioning should have failed");
+            Assert.equal(testRunner.warningIssues.length, 0, "should have no warnings");
+            Assert.equal(testRunner.errorIssues.length, 1, "should have 1 error");
+
+            done();
+        });
+
+        it("should fail if no version match is found ", (done: MochaDone) => {
+                // Arrange
+                let testPath: string = Path.join(__dirname, "VersionAssemblies" ,"fail-if-no-version-match-found.test.js");
+                let testRunner: MockTest.MockTestRunner = new MockTest.MockTestRunner(testPath);
+
+                // Act
+                testRunner.run();
+
+                // Assert
+                Assert(testRunner.failed, "versioning should have failed");
+                Assert.equal(testRunner.warningIssues.length, 0, "should have no warnings");
+                Assert.equal(testRunner.errorIssues.length, 1, "should have 1 error");
+
+                done();
+            });
     });
 });
