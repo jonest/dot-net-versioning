@@ -1,3 +1,4 @@
+import * as Assert from "assert";
 import * as MockRun from "vsts-task-lib/mock-run";
 import * as MockAnswer from "vsts-task-lib/mock-answer";
 import * as Path from "path";
@@ -72,11 +73,5 @@ using System.Resources;
 [assembly: AssemblyInformationalVersion("${versionNumber}")]`;
 
     let actualOutput = FS.readFileSync(tempFilePath, "utf-8").toString();
-    if (actualOutput.trim() === expectedFile.trim()) {
-        console.log("Success!");
-    } else {
-        console.log("Failure! Actual output:")
-        console.log(actualOutput.trim());
-        console.error("Failed!");
-    }
+    Assert.equal(actualOutput.trim(), expectedFile.trim());
 });

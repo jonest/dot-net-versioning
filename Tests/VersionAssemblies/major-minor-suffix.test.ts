@@ -1,3 +1,4 @@
+import * as Assert from "assert";
 import * as MockRun from "vsts-task-lib/mock-run";
 import * as MockAnswer from "vsts-task-lib/mock-answer";
 import * as Path from "path";
@@ -50,7 +51,7 @@ FS.writeFile(tempFilePath, originalFile, (err) => {
     taskMockRunner.setInput("filePattern", "**\\SolutionInfo.*");
     taskMockRunner.setInput("versionNumber", versionNumber);
     taskMockRunner.setInput("versionPattern", versionPattern);
-    taskMockRunner.setInput("assemblyInfoSuffix", "");
+    taskMockRunner.setInput("assemblyInfoSuffix", versionSuffix);
     taskMockRunner.setInput("failIfNoMatch", "false");
     taskMockRunner.setInput("sourcePath", sourcePath);
 
@@ -73,11 +74,6 @@ using System.Resources;
 [assembly: AssemblyInformationalVersion("${versionNumber}${versionSuffix}")]`;
 
     let actualOutput = FS.readFileSync(tempFilePath, "utf-8").toString();
-    if (actualOutput.trim() === expectedFile.trim()) {
-        console.log("Success!");
-    } else {
-        console.log("Failure! Actual output:")
-        console.log(actualOutput.trim());
-        console.error("Failed!");
-    }
+    console.log(actualOutput);
+    Assert.equal(actualOutput.trim(), expectedFile.trim());
 });
