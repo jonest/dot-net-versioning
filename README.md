@@ -5,7 +5,7 @@ A simple versioning extension to version .NET assembly files in Visual Studio Te
 
 | Master        | Dev |
 | :-------------: | :-------------: |
-| ![Master](https://ty-jones-dev.visualstudio.com/_apis/public/build/definitions/66b03914-9000-4fdb-b832-61fde98e97a1/8/badge) | ![Dev](https://ty-jones-dev.visualstudio.com/_apis/public/build/definitions/66b03914-9000-4fdb-b832-61fde98e97a1/9/badge) |
+| ![Master](https://whotyjones.visualstudio.com/_apis/public/build/definitions/176be59f-4a98-46d0-91c3-8b969ddafde4/4/badge) | ![Dev](https://whotyjones.visualstudio.com/_apis/public/build/definitions/176be59f-4a98-46d0-91c3-8b969ddafde4/5/badge) |
 
 ### Requirements
 - [NodeJS](https://nodejs.org/en/download/)
